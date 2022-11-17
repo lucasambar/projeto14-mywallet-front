@@ -1,14 +1,42 @@
+import axios from "axios"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import COLORS from "../constants/colors"
 
 export default function Forms () {
+    const navigate = useNavigate()
+
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        password: "",
+        confirmePassword: ""
+    })
+
+    function cadastrar (event) {
+        event.preventDefault()
+
+        const promisse = axios.post("http://localhost:5001/sign-up", user)
+        promisse.then(() => navigate("/"))
+        promisse.catch(erro => console.log(erro))
+    }
+
     return (
-        <Form>
-            <Input type="text" placeholder="Nome"/>
-            <Input type="email" placeholder="E-mail"/>
-            <Input type="password" placeholder="Senha"/>
-            <Input type="password" placeholder="Cofirme a senha"/>
-            <Button><p>Entrar</p></Button>
+        <Form onSubmit={cadastrar}>
+            <Input type="text" placeholder="Nome" value={user.name}
+            onChange={(e) => {setUser({...user, name: e.target.value})}}/>
+
+            <Input type="email" placeholder="E-mail" value={user.email}
+            onChange={(e) => {setUser({...user, email: e.target.value})}}/>
+            
+            <Input type="password" placeholder="Senha" value={user.password}
+            onChange={(e) => {setUser({...user, password: e.target.value})}}/>
+            
+            <Input type="password" placeholder="Cofirme a senha" value={user.confirmePassword}
+            onChange={(e) => {setUser({...user, confirmePassword: e.target.value})}}/>
+            
+            <Button onClick={cadastrar}><p>Cadastrar</p></Button>
         </Form>
     )
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import COLORS from "../constants/colors.js"
 import logo from "../images/logo.png"
@@ -8,7 +9,9 @@ export default function PageLogin () {
         <Background>
             <Img src={logo} alt="logo"/>
             <Forms/>
-            <Texto>Primeira vez? Cadastre-se!</Texto>
+            <Link to="/sign-up">
+                <Texto>Primeira vez? Cadastre-se!</Texto>
+            </Link>
         </Background>
     )
 }
@@ -38,4 +41,6 @@ const Texto = styled.p`
 
     display: block;
     margin-top: 36px;
+
+    cursor: pointer;
 `
