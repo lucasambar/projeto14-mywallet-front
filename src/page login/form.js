@@ -1,12 +1,36 @@
+import axios from "axios"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import COLORS from "../constants/colors"
 
 export default function Forms () {
+    const navigate = useNavigate()
+
+    const [user, setUser] = useState({
+        email: "",
+        password: ""
+    })
+    
+    function signIn (e) {
+        e.preventDefault()
+
+        const promisse = axios.post("http://localhost:5001/sign-in", user)
+        promisse.then((response) => {
+            localStorage.setItem("user", JSON.stringify(response.data))
+            navigate("/home")})
+        promisse.catch(erro => console.log(erro.response.data))        
+    }
+
     return (
-        <Form>
-            <Input type="email" placeholder="E-mail"/>
-            <Input type="password" placeholder="Senha"/>
-            <Button><p>Entrar</p></Button>
+        <Form onSubmit={signIn}>
+            <Input type="email" placeholder="E-mail" value={user.email}
+            onChange={(e) => setUser({...user, email: e.target.value})}/>
+
+            <Input type="password" placeholder="Senha"value={user.password}
+            onChange={(e) => setUser({...user, password: e.target.value})}/>
+
+            <Button type="submit"><p>Entrar</p></Button>
         </Form>
     )
 }

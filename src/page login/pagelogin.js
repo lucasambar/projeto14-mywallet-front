@@ -1,10 +1,18 @@
-import { Link } from "react-router-dom"
+import { useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import COLORS from "../constants/colors.js"
 import logo from "../images/logo.png"
 import Forms from "./form.js"
 
 export default function PageLogin () {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const user = localStorage.getItem("user")
+        if (user) {navigate("/home")}
+    },[navigate])
+
     return (
         <Background>
             <Img src={logo} alt="logo"/>

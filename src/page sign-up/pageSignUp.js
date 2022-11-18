@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import COLORS from "../constants/colors"
 import logo from "../images/logo.png"
@@ -8,10 +9,13 @@ export default function PageSignUp () {
         <Background>
             <img src={logo} alt="logo"/>
             <Forms/>
-            <Texto>Já tem uma conta? Entre agora!</Texto>
+            <Link to="/">
+                <Texto>Já tem uma conta? Entre agora!</Texto>
+            </Link>  
         </Background>
     )
 }
+
 
 const Background = styled.div`
     background-color: ${COLORS.background};
