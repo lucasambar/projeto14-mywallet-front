@@ -1,11 +1,15 @@
 import styled from "styled-components"
 import COLORS from "../constants/colors"
+import Buttons from "./Buttons"
 import Header from "./Header"
+import WalletBox from "./WalletBox"
 
 export default function PageHome () {
     return (
         <Background>
             <Header/>
+            <WalletBox/>
+            <Buttons/>
         </Background>
     )
 }
