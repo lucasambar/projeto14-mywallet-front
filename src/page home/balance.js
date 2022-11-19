@@ -1,8 +1,7 @@
 import styled from "styled-components"
 
-export default function Balance () {
-    const money = 2849.96
-    
+export default function Balance ({money}) {
+ 
     return (
         <Container>
             <Text>SALDO</Text>

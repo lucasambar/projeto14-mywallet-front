@@ -1,14 +1,14 @@
 import styled from "styled-components"
 
-export default function Line () {
-    const money = 10
+export default function Line ({value}) {
+
     return (
         <Container>
             <div>
-                <Date>30/11</Date>
-                <Info>Almoço mãe</Info>
+                <Date>{value.date}</Date>
+                <Info>{value.description}</Info>
             </div>
-            <Money money={money}>{money}</Money>
+            <Money money={value.type}>{value.amount}</Money>
         </Container>
     )
 }
@@ -48,5 +48,5 @@ const Money = styled.p`
     line-height: 20px;
     letter-spacing: 0em;
     text-align: right;
-    color: ${props => props.money >= 0 ? "#03AC00" : "#C70000"}
+    color: ${props => props.money === "entrance" ? "#03AC00" : "#C70000"};
 `
