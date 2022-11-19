@@ -1,5 +1,5 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
+// import axios from "axios"
+// import { useEffect, useState } from "react"
 import styled from "styled-components"
 import COLORS from "../constants/colors"
 import Balance from "./balance"

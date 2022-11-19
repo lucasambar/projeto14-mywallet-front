@@ -1,19 +1,22 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import COLORS from "../constants/colors"
 import minus from "../images/minus.png"
 import plus from "../images/plus.png"
 
 export default function Buttons () {
+    const navigate = useNavigate()
+
     return (
         <Container>
-            <Button>
+            <Button onClick={() => navigate("/new/entrance")}>
                 <div>
                     <img src={plus} alt="plus icon"/>
                     <Text>Nova Entrada</Text>
                 </div>
             </Button>
 
-            <Button>
+            <Button onClick={() => navigate("/new/exit")}>
                 <div>
                     <img src={minus} alt="minus icon"/>
                     <Text>Nova Saída</Text>
