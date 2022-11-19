@@ -1,4 +1,6 @@
+import axios from "axios"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import COLORS from "../constants/colors"
 
@@ -9,12 +11,25 @@ export default function Forms ({type, text}) {
         description: ""
     })
 
-    function saveValue (event) {
+    const navigate = useNavigate()
+
+    const user = JSON.parse(localStorage.getItem("user"))
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${user.token}`
+        }
+    }
+
+    function saveNew (event) {
         event.preventDefault()
+
+        const promisse = axios.post("http://localhost:5001/wallet", info, config)
+        promisse.then(() => navigate("/home"))
+        promisse.catch(erro => console.log(erro.response.data))
     }
 
     return (
-        <Form onSubmit={saveValue}>
+        <Form onSubmit={saveNew}>
             <Input placeholder="Valor" type="text" value={info.amount}
             onChange={(e) => setInfo({...info, amount: e.target.value})}/>
             
