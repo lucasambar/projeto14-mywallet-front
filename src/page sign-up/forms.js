@@ -7,6 +7,7 @@ import COLORS from "../constants/colors"
 export default function Forms () {
     const navigate = useNavigate()
 
+    const [error, setError] = useState("")
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -19,7 +20,7 @@ export default function Forms () {
 
         const promisse = axios.post("http://localhost:5001/sign-up", user)
         promisse.then(() => navigate("/"))
-        promisse.catch(erro => console.log(erro))
+        promisse.catch(erro => setError(erro.response.data))
     }
 
     return (
@@ -36,6 +37,7 @@ export default function Forms () {
             <Input type="password" placeholder="Cofirme a senha" value={user.confirmePassword}
             onChange={(e) => {setUser({...user, confirmePassword: e.target.value})}}/>
             
+            <Error>{error}</Error>
             <Button onClick={cadastrar}><p>Cadastrar</p></Button>
         </Form>
     )
@@ -97,4 +99,13 @@ const Button = styled.button`
         color: ${COLORS.branco};
     }
 
+`
+const Error = styled.p`
+    font-family: Raleway;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #C70000;
 `

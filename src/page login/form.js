@@ -7,6 +7,7 @@ import COLORS from "../constants/colors"
 export default function Forms () {
     const navigate = useNavigate()
 
+    const [erro, setErro] = useState("")
     const [user, setUser] = useState({
         email: "",
         password: ""
@@ -19,7 +20,7 @@ export default function Forms () {
         promisse.then((response) => {
             localStorage.setItem("user", JSON.stringify(response.data))
             navigate("/home")})
-        promisse.catch(erro => console.log(erro.response.data))        
+        promisse.catch(erro => setErro(erro.response.data))        
     }
 
     return (
@@ -30,6 +31,7 @@ export default function Forms () {
             <Input type="password" placeholder="Senha"value={user.password}
             onChange={(e) => setUser({...user, password: e.target.value})}/>
 
+            <Error>{erro}</Error>
             <Button type="submit"><p>Entrar</p></Button>
         </Form>
     )
@@ -91,4 +93,13 @@ const Button = styled.button`
         color: ${COLORS.branco};
     }
 
+`
+const Error = styled.p`
+    font-family: Raleway;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #C70000;
 `

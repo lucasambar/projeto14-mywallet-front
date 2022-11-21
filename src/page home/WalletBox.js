@@ -24,11 +24,14 @@ export default function WalletBox () {
     return (
         <Box>
             {data ? 
+                data.wallet.length !== 0 ?
                 <>
-                    {data.wallet.map((value) => <Line value={value}/>)}
+                    {data.wallet.map((value, index) => <Line value={value} key={index}/>)}
                     <Balance money = {data.balance}/>
-                </>
-            : <p>deu ruim!</p>}
+                </> :
+                <Text>Não há registros de
+                entrada ou saída</Text>
+            : <Text>Ops, algo deu de errado, tente mais tarde :/</Text>}
         </Box>
     )
 }
@@ -41,4 +44,22 @@ const Box = styled.div`
     padding: 15px 15px;
 
     position: relative;
+`
+const Text = styled.p`
+    font-family: Raleway;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #868686;
+
+    display: block;
+    height: 46px;
+    width: 180px;
+
+    position: absolute;
+    height: 46px;
+    left: 73px;
+    top: 200px;
 `

@@ -5,6 +5,7 @@ import styled from "styled-components"
 import COLORS from "../constants/colors"
 
 export default function Forms ({type, text}) {
+    const [error, setError] = useState("")
     const [info, setInfo] = useState({
         type,
         amount: "",
@@ -25,7 +26,7 @@ export default function Forms ({type, text}) {
 
         const promisse = axios.post("http://localhost:5001/wallet", info, config)
         promisse.then(() => navigate("/home"))
-        promisse.catch(erro => console.log(erro.response.data))
+        promisse.catch(erro => erro(erro.response.data))
     }
 
     return (
@@ -36,6 +37,7 @@ export default function Forms ({type, text}) {
             <Input placeholder="Descrição" type="text" value={info.description}
             onChange={(e) => setInfo({...info, description: e.target.value})}/>
 
+            <Error>{error}</Error>
             <Button type="submit">
                 <p>Salvar {text}</p>
             </Button>
@@ -101,4 +103,13 @@ const Button = styled.button`
     cursor: pointer;
 
     p {display:block;}
+`
+const Error = styled.p`
+    font-family: Raleway;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #C70000;
 `
